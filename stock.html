@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blox Trade - Fast and Easy Trading">
+    <title>Blox Trade - Fast and Easy Trading</title>
+    <style>
+        /* Add your existing styles here */
+        .stock-link {
+            font-size: 0.8em;
+            color: #ccc;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .stock-link:hover {
+            color: #ff4444;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BLOX TRADE</h1>
+        <p>Your Ultimate Trading Solution in Blox Fruits</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="payment.html">Premium</a>
+        <a href="#" id="stockLink" class="stock-link">Stock</a> <!-- Hidden stock link -->
+    </nav>
+
+    <div class="content">
+        <p>
+            Trading is a Fundamental Organ in Blox Fruits. It helps players achieve their demanded fruits by offering other fruits. But sometimes to find a specific trade, it takes a very long time, even days or weeks. So, to solve this problem, we have arrived with <strong>BLOX TRADE</strong>, a site that makes trades extremely fast, quick, and easy.
+        </p>
+
+        <h2>Trade Request Form</h2>
+        <form id="tradeForm">
+            <label for="robloxUsername">Roblox Username:</label>
+            <input type="text" id="robloxUsername" name="robloxUsername" required>
+
+            <label for="fruitNeeded">Fruit You Need:</label>
+            <select id="fruitNeeded" name="fruitNeeded" required>
+                <!-- Options will be populated dynamically -->
+            </select>
+
+            <label for="fruitOffered">Fruit You Will Offer:</label>
+            <input type="text" id="fruitOffered" name="fruitOffered" required>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="copy-button" id="copyButtonContainer">
+            <button id="copyButton">Copy Email Layout</button>
+            <p id="emailLayout" style="display: none;"></p>
+        </div>
+
+        <div id="composeButtonContainer" style="display: none; margin-top: 20px;">
+            <button onclick="composeEmail()">Compose Email</button>
+        </div>
+    </div>
+
+    <!-- Premium Membership Section -->
+    <div class="premium-section" id="premium">
+        <h2>🌟 Premium Membership 🌟</h2>
+        <p>Upgrade to Premium for exclusive benefits!</p>
+        <ul>
+            <li>✅ 2 Free Perm Rocket Fruits</li>
+            <li>✅ Faster Trade Processing</li>
+            <li>✅ VIP Stock Arrangement (Priority Access to Reserved Fruits)</li>
+        </ul>
+        <p>Cost: ₹300</p>
+        <button onclick="redirectToPayment()">Upgrade Now</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Blox Trade. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        // Fetch fruits from local storage and populate the dropdown
+        function populateFruitDropdown() {
+            const fruits = JSON.parse(localStorage.getItem('fruits')) || [];
+            const fruitDropdown = document.getElementById('fruitNeeded');
+
+            // Clear existing options
+            fruitDropdown.innerHTML = '<option value="">Select a fruit</option>';
+
+            // Add fruits from local storage
+            fruits.forEach(fruit => {
+                const option = document.createElement('option');
+                option.value = fruit;
+                option.textContent = fruit;
+                fruitDropdown.appendChild(option);
+            });
+        }
+
+        // Call the function to populate the dropdown when the page loads
+        populateFruitDropdown();
+
+        // Password protection for stock page
+        document.getElementById('stockLink').addEventListener('click', function (event) {
+            event.preventDefault();
+            const password = prompt('Enter the password to access the stock page:');
+            if (password === 'GopalMahapatra@1974') {
+                window.location.href = 'stock.html';
+            } else {
+                alert('Incorrect password. Access denied.');
+            }
+        });
+
+        // Rest of your existing JavaScript code
+        document.getElementById('tradeForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get form values
+            const robloxUsername = document.getElementById('robloxUsername').value;
+            const fruitNeeded = document.getElementById('fruitNeeded').value;
+            const fruitOffered = document.getElementById('fruitOffered').value;
+
+            // Generate email layout
+            const emailLayout = `
+                Roblox Username: ${robloxUsername}
+                Fruit Needed: ${fruitNeeded}
+                Fruit Offered: ${fruitOffered}
+                Special Code: bloxtradeoffers
+            `;
+
+            // Display the copy button and store the email layout
+            document.getElementById('copyButtonContainer').style.display = 'block';
+            document.getElementById('emailLayout').innerText = emailLayout;
+
+            // Display the compose button
+            document.getElementById('composeButtonContainer').style.display = 'block';
+        });
+
+        document.getElementById('copyButton').addEventListener('click', function () {
+            const emailLayout = document.getElementById('emailLayout').innerText;
+            navigator.clipboard.writeText(emailLayout).then(function () {
+                alert('Email layout copied to clipboard!');
+            }).catch(function () {
+                alert('Failed to copy email layout.');
+            });
+        });
+
+        function composeEmail() {
+            const robloxUsername = document.getElementById('robloxUsername').value;
+            const fruitNeeded = document.getElementById('fruitNeeded').value;
+            const fruitOffered = document.getElementById('fruitOffered').value;
+
+            const subject = `Trade Request - ${robloxUsername}`;
+            const body = `
+                Roblox Username: ${robloxUsername}%0D%0A
+                Fruit Needed: ${fruitNeeded}%0D%0A
+                Fruit Offered: ${fruitOffered}%0D%0A
+                Special Code: bloxtradeoffers
+            `;
+
+            window.open(`mailto:bloxtrade916@gmail.com?subject=${subject}&body=${body}`);
+        }
+
+        function redirectToPayment() {
+            window.location.href = "payment.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BloxTrade - Home</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #ff4444;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 30px;
+      background: linear-gradient(45deg, #ff4444, #ff8800);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #ff8800, #ff4444);
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-user {
+      background: linear-gradient(45deg, #007bff, #00bfff);
+    }
+
+    .btn-user:hover {
+      background: linear-gradient(45deg, #00bfff, #007bff);
+    }
+
+    .btn-trader {
+      background: linear-gradient(45deg, #28a745, #32cd32);
+    }
+
+    .btn-trader:hover {
+      background: linear-gradient(45deg, #32cd32, #28a745);
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #777;
+    }
+
+    .footer a {
+      color: #ff4444;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to BloxTrade</h1>
+    <h2>(Beta Programme)</h2>
+    <p>Your ultimate platform for trading Blox Fruits. Choose your role to get started.</p>
+
+    <div class="button-container">
+      <button class="btn btn-user" onclick="location.href='Blox Fruits Trading2.html'">Continue as User</button>
+      <button class="btn btn-trader" onclick="location.href='trader.html'">Continue as Trader<font color=red>(Under Development)</font></button>
+    </div>
+
+    <div class="footer">
+      <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+      <p>&copy; 2025 BloxTrade. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader Management - BloxTrade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #ff4444;
+        }
+        .trader-card {
+            background: #fff3f3;
+            border: 2px solid #ff4444;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            text-align: left;
+            position: relative;
+        }
+        .trader-card h2 {
+            margin: 0;
+            color: #ff4444;
+        }
+        .trader-card p {
+            margin: 5px 0;
+        }
+        .edit-input {
+            width: 100px;
+            padding: 5px;
+            margin-left: 5px;
+        }
+        .action-buttons {
+            margin-top: 10px;
+        }
+        .remove-button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .remove-button:hover {
+            background: darkred;
+        }
+        .update-button {
+            background: green;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .update-button:hover {
+            background: darkgreen;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Trader Management</h1>
+        <div id="trader-list">
+            <!-- Traders will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+
+
+
+
+  function removeTrader(username) {
+      let traders = JSON.parse(localStorage.getItem('traders')) || [];
+      let kickedTraders = JSON.parse(localStorage.getItem('kickedTraders')) || [];
+
+      // Find and remove the trader
+      traders = traders.filter(trader => trader.username !== username);
+      localStorage.setItem('traders', JSON.stringify(traders));
+
+      // Save the kicked trader
+      kickedTraders.push(username);
+      localStorage.setItem('kickedTraders', JSON.stringify(kickedTraders));
+
+      // If the removed trader is currently logged in, log them out
+      if (localStorage.getItem('currentTrader') === username) {
+          localStorage.removeItem('currentTrader');
+      }
+
+      alert(`${username} has been removed.`);
+      location.reload();
+  }
+
+
+
+
+
+
+
+        // Fetch traders from local storage (or initialize with dummy data)
+        let traders = JSON.parse(localStorage.getItem('traders')) || [
+            { username: "Trader1", trades: 10, revenue: 500 },
+            { username: "Trader2", trades: 7, revenue: 350 },
+        ];
+
+        function loadTraders() {
+            let container = document.getElementById("trader-list");
+            container.innerHTML = "";
+
+            traders.forEach((trader, index) => {
+                container.innerHTML += `
+                    <div class="trader-card">
+                        <h2>${trader.username}</h2>
+                        <p><strong>Trades Done:</strong> 
+                            <input type="number" class="edit-input" id="trades-${index}" value="${trader.trades}">
+                        </p>
+                        <p><strong>Revenue (Robux):</strong> 
+                            <input type="number" class="edit-input" id="revenue-${index}" value="${trader.revenue}">
+                        </p>
+                        <div class="action-buttons">
+                            <button class="update-button" onclick="updateTrader(${index})">Update</button>
+                            <button class="remove-button" onclick="removeTrader(${index})">Remove Trader</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function updateTrader(index) {
+            let updatedTrades = document.getElementById(`trades-${index}`).value;
+            let updatedRevenue = document.getElementById(`revenue-${index}`).value;
+            
+            traders[index].trades = parseInt(updatedTrades);
+            traders[index].revenue = parseInt(updatedRevenue);
+            
+            localStorage.setItem('traders', JSON.stringify(traders));
+            alert("Trader data updated successfully!");
+        }
+
+        function removeTrader(index) {
+            if (confirm("Are you sure you want to remove this trader?")) {
+                traders.splice(index, 1);
+                localStorage.setItem('traders', JSON.stringify(traders));
+                loadTraders();
+            }
+        }
+
+        window.onload = loadTraders;
+    </script>
+
+</body>
+</html>

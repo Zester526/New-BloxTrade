@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Requests - BloxTrade</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #ff4444;
+        }
+        .trade-request {
+            background: #fff3f3;
+            border: 2px solid #ff4444;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .trade-request h2 {
+            margin: 0;
+            color: #ff4444;
+        }
+        .trade-request p {
+            margin: 5px 0;
+        }
+        .trade-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background: #ff4444;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .trade-button:hover {
+            background: #ff8800;
+        }
+        .footer {
+            margin-top: 20px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Trade Requests</h1>
+        <div id="trade-requests">
+            <!-- Trade requests will be inserted dynamically here -->
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 BloxTrade. All rights reserved.</p>
+    </div>
+
+    <script>
+        // Initialize EmailJS with your Public Key
+        emailjs.init("JBvDn59HM_5AtgZP");
+
+        // Get currently logged-in trader's username from localStorage
+        const loggedInTrader = localStorage.getItem("currentTrader");
+
+        if (!loggedInTrader) {
+            alert("Please log in as a trader to access trade requests.");
+            window.location.href = "trader-login.html";
+        }
+
+        // Dummy trade request data (Replace with backend data later)
+        let tradeRequests = [
+            { username: "Player1", email: "player1@example.com", fruit: "Quake Fruit", offer: "2M Beli", status: "Available" },
+            { username: "Player2", email: "player2@example.com", fruit: "Magma Fruit", offer: "1.5M Beli", status: "Available" },
+            { username: "Player3", email: "player3@example.com", fruit: "Ghost Fruit", offer: "Legendary Sword", status: "Available" }
+        ];
+
+        function loadTrades() {
+            let container = document.getElementById("trade-requests");
+            container.innerHTML = "";
+
+            tradeRequests.forEach((trade, index) => {
+                container.innerHTML += `
+                    <div class="trade-request">
+                        <h2>${trade.fruit}</h2>
+                        <p><strong>Offered by:</strong> ${trade.username}</p>
+                        <p><strong>Contact:</strong> ${trade.email}</p>
+                        <p><strong>Offer:</strong> ${trade.offer}</p>
+                        <button class="trade-button" onclick="handleTrade(${index})">Trade Now</button>
+                    </div>
+                `;
+            });
+        }
+
+        function handleTrade(index) {
+            let traders = JSON.parse(localStorage.getItem('traders')) || [];
+            let trader = traders.find(t => t.username === loggedInTrader);
+
+            if (trader) {
+                let trade = tradeRequests[index];
+
+                // Prepare email parameters
+                let emailParams = {
+                    user_username: trade.username,
+                    user_trade: trade.fruit,
+                    trader_username: loggedInTrader,
+                    trader_offer: trade.offer
+                };
+
+                // Send email to bloxtrade916@gmail.com
+                emailjs.send("service_chfodbw", "template_n3rub5c", emailParams)
+                    .then(response => {
+                        console.log("✅ Email sent successfully:", response);
+
+                        // Update trader's trade count
+                        trader.tradesThisMonth = (trader.tradesThisMonth || 0) + 1;
+                        trader.totalTrades = (trader.totalTrades || 0) + 1;
+
+                        localStorage.setItem('traders', JSON.stringify(traders));
+
+                        alert("Trade assigned! Email notification sent.");
+                        window.location.href = 'trader.html';
+                    })
+                    .catch(error => {
+                        console.error("❌ Email failed:", error);
+                        alert("Email failed: " + error.message); // Show exact error
+                        window.location.href = 'trader.html';
+                    });
+
+            } else {
+                alert('Trader not found. Please log in again.');
+                window.location.href = 'trader-login.html';
+            }
+        }
+
+        window.onload = loadTrades;
+    </script>
+</body>
+</html>

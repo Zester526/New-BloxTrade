@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Premium</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        .btn { display: block; margin: 10px auto; padding: 10px; background: #28a745; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Buy Premium Membership</h2>
+        <button class="btn" onclick="showQR('premium')">Buy Premium (₹79)</button>
+        <button class="btn" onclick="showQR('premiumplus')">Buy Premium+ (₹250)</button>
+        
+        <div id="qr-section" style="display: none;">
+            <h3>Scan & Pay</h3>
+            <img id="qr-code" src="your-fampay-qr-code.png" alt="Fampay QR Code" width="200">
+            <p>After payment, enter transaction details below:</p>
+            <input type="text" id="txn-id" placeholder="Transaction ID" required>
+            <button class="btn" onclick="submitPayment()">Submit</button>
+        </div>
+    </div>
+    
+    <script>
+        function showQR(type) {
+            document.getElementById('qr-section').style.display = 'block';
+            // You can change QR based on type if needed
+        }
+
+        function submitPayment() {
+            const txnId = document.getElementById('txn-id').value;
+            if (!txnId) {
+                alert('Please enter a valid Transaction ID');
+                return;
+            }
+            alert('Payment submitted! You will be upgraded after verification.');
+            // Here, you can send txnId to your database for manual verification
+        }
+    </script>
+</body>
+</html>

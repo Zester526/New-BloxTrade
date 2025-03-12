@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blox Trade - A platform to make trading in Blox Fruits fast, quick, and easy.">
+    <title>Blox Trade - Fast and Easy Trading</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #ff4444;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
+        nav a:hover {
+            color: #ff4444;
+        }
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .content h2 {
+            color: #ff4444;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        .content p {
+            font-size: 1.2em;
+        }
+        .warning-note {
+            background-color: #fff3f3;
+            border: 2px solid #ff4444;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .warning-note p {
+            margin: 0;
+            font-size: 1.1em;
+            color: #ff4444;
+            font-weight: bold;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        button {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+        .copy-button {
+            margin-top: 20px;
+            display: none;
+        }
+        .premium-section {
+            background: linear-gradient(45deg, #ffd700, #ffcc00);
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .premium-section h2 {
+            color: #000;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .premium-section p {
+            font-size: 1.2em;
+            color: #333;
+        }
+        .premium-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .premium-section ul li {
+            font-size: 1.1em;
+            margin: 10px 0;
+            color: #000;
+        }
+        .premium-section button {
+            background-color: #000;
+            color: #ffd700;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .premium-section button:hover {
+            background-color: #333;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+        footer a {
+            color: #ff4444;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .offer-more-button {
+            background-color: #28a745;
+            margin-bottom: 20px;
+        }
+        .offer-more-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BLOX TRADE</h1>
+        <p>Your Ultimate Trading Solution in Blox Fruits</p>
+    </header>
+
+    <!-- Navigation Bar with "How to Use" Button -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="Blox Fruits Trading2.html">Stock</a>
+        <a href="HowToUse.html">How to Use</a> <!-- Added "How to Use" button -->
+        <a href="#premium">Premium</a>
+    </nav>
+
+    <div class="content">
+        <p>
+            Trading is a Fundamental Organ in Blox Fruits. It helps players achieve their demanded fruits by offering other fruits. But sometimes to find a specific trade, it takes a very long time, even days or weeks. So, to solve this problem, we have arrived with <strong>BLOX TRADE</strong>, a site that makes trades extremely fast, quick, and easy.
+        </p>
+
+        <!-- Warning Note -->
+        <div class="warning-note">
+            <p>⚠️ Please keep the value difference in mind and request trades with a valid value difference. Fair trades are more likely to be accepted!</p>
+        </div>
+
+        <h2>Trade Request Form</h2>
+        <form id="tradeForm">
+            <label for="robloxUsername">Roblox Username:</label>
+            <input type="text" id="robloxUsername" name="robloxUsername" required>
+
+            <label for="fruitNeeded">Item You need:</label>
+            <select id="fruitNeeded" name="fruitNeeded" required>
+                <option value="">Select a fruit</option>
+                <option value="Quake">Quake</option>
+                <option value="Magma">Magma</option>
+                <option value="Rubber">Rubber</option>
+                <option value="Ghost">Ghost</option>
+                <option value="Ice">Ice</option>
+
+                <option value="Perm Rocket">Perm Rocket</option>
+                <option value="Perm Spin">Perm Spin</option>
+                <option value="Perm Blade">Perm Blade</option>
+                <option value="Perm Smoke">Perm Smoke</option>
+
+                <option value="Stat Reset">Stat Reset</option>
+                <option value="Respawn Boses">Respawn Boses</option>
+                <option value="Change Race">Change Race</option>
+
+                <option value="2x Mastery Pass">2x Mastery pass</option>
+                <option value="2x Money Pass">2x Money Pass</option>
+                <option value="2x Boss Drop Chance pass">2x Boss Drop Chance pass</option>
+                <option value="Fast Boats pass">Fast Boats pass</option>
+
+
+                
+
+
+
+
+            </select>
+
+            <div id="fruitOfferedContainer">
+                <label for="fruitOffered1">Fruit You Will Offer:</label>
+                <input type="text" id="fruitOffered1" name="fruitOffered1" required>
+            </div>
+
+            <button type="button" class="offer-more-button" id="offerMoreButton">Offer More Fruits</button>
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="copy-button" id="copyButtonContainer">
+            <button id="copyButton">Copy Email Layout</button>
+            <p id="emailLayout" style="display: none;"></p>
+        </div>
+
+        <div id="composeButtonContainer" style="display: none; margin-top: 20px;">
+            <button onclick="composeEmail()">Compose Email</button>
+        </div>
+    </div>
+
+    <!-- Premium Membership Section -->
+    <div class="premium-section" id="premium">
+        <h2>🌟 Premium Membership 🌟</h2>
+        <p>Upgrade to Premium for exclusive benefits!</p>
+        <ul>
+            <li>✅ 2 Free Perm Rocket Fruits</li>
+            <li>✅ Faster Trade Processing</li>
+            <li>✅ VIP Stock Arrangement (Priority Access to Reserved Fruits)</li>
+        </ul>
+        <p>Cost: <s>₹300</s> ₹250</p>
+        <button onclick="redirectToPayment()">Upgrade Now</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Blox Trade. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        let fruitCounter = 1;
+
+        document.getElementById('offerMoreButton').addEventListener('click', function () {
+            if (fruitCounter < 4) {
+                fruitCounter++;
+                const newFruitInput = document.createElement('div');
+                newFruitInput.innerHTML = `
+                    <label for="fruitOffered${fruitCounter}">Fruit You Will Offer:</label>
+                    <input type="text" id="fruitOffered${fruitCounter}" name="fruitOffered${fruitCounter}" required>
+                `;
+                document.getElementById('fruitOfferedContainer').appendChild(newFruitInput);
+            } else {
+                alert('You can offer a maximum of 4 fruits.');
+            }
+        });
+
+        document.getElementById('tradeForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get form values
+            const robloxUsername = document.getElementById('robloxUsername').value;
+            const fruitNeeded = document.getElementById('fruitNeeded').value;
+            let fruitsOffered = [];
+            for (let i = 1; i <= fruitCounter; i++) {
+                const fruit = document.getElementById(`fruitOffered${i}`).value;
+                if (fruit) fruitsOffered.push(fruit);
+            }
+
+            // Generate email layout
+            const emailLayout = `
+                Roblox Username: ${robloxUsername}
+                Fruit Needed: ${fruitNeeded}
+                Fruits Offered: ${fruitsOffered.join(', ')}
+                Special Code: bloxtradeoffers
+            `;
+
+            // Display the copy button and store the email layout
+            document.getElementById('copyButtonContainer').style.display = 'block';
+            document.getElementById('emailLayout').innerText = emailLayout;
+
+            // Display the compose button
+            document.getElementById('composeButtonContainer').style.display = 'block';
+        });
+
+        document.getElementById('copyButton').addEventListener('click', function () {
+            const emailLayout = document.getElementById('emailLayout').innerText;
+            navigator.clipboard.writeText(emailLayout).then(function () {
+                alert('Email layout copied to clipboard!');
+            }).catch(function () {
+                alert('Failed to copy email layout.');
+            });
+        });
+
+        function composeEmail() {
+            const robloxUsername = document.getElementById('robloxUsername').value;
+            const fruitNeeded = document.getElementById('fruitNeeded').value;
+            let fruitsOffered = [];
+            for (let i = 1; i <= fruitCounter; i++) {
+                const fruit = document.getElementById(`fruitOffered${i}`).value;
+                if (fruit) fruitsOffered.push(fruit);
+            }
+
+            const subject = `Trade Request - ${robloxUsername}`;
+            const body = `
+                Roblox Username: ${robloxUsername}%0D%0A
+                Fruit Needed: ${fruitNeeded}%0D%0A
+                Fruits Offered: ${fruitsOffered.join(', ')}%0D%0A
+                Special Code: bloxtradeoffers
+            `;
+
+            window.open(`mailto:bloxtrade916@gmail.com?subject=${subject}&body=${body}`);
+        }
+
+        function redirectToPayment() {
+            // Redirect to the payment page (you can design this later)
+            window.location.href = "premium1444.html";
+        }
+    </script>
+</body>
+</html>

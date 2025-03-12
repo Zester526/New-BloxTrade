@@ -1,0 +1,92 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Background Styling */
+body {
+    background: linear-gradient(135deg, #1a1a1a, #ff4444);
+    color: white;
+    text-align: center;
+    padding: 50px;
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Main Heading */
+h1 {
+    font-size: 50px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Paragraphs */
+p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* Countdown Timer */
+.countdown {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: inline-block;
+}
+
+/* Features Box */
+.features {
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    text-align: left;
+}
+
+/* Features Heading */
+.features h2 {
+    font-size: 30px;
+    color: #ffcc00;
+    margin-bottom: 15px;
+}
+
+/* Features List */
+.features ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.features ul li {
+    font-size: 18px;
+    margin: 10px 0;
+    padding-left: 10px;
+    position: relative;
+}
+
+/* Checkmark Icon for Features */
+.features ul li::before {
+    content: "✅";
+    color: #ffcc00;
+    font-size: 20px;
+    position: absolute;
+    left: -25px;
+    top: 2px;
+}
+
+/* Footer */
+.footer {
+    margin-top: 50px;
+    font-size: 14px;
+    color: #ddd;
+}

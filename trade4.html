@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blox Fruits Trading - BloxTrade</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #ff9900, #ff4444, #cc0099);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #ff4444;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown {
+      margin-bottom: 20px;
+      transform: translateX(-100%);
+      animation: slideIn 0.5s ease-out forwards;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+
+    .dropdown select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ff4444;
+      border-radius: 5px;
+      background-color: #fff3f3;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown select:hover {
+      border-color: #e63939;
+      box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+    }
+
+    .selected-items {
+      margin-top: 20px;
+    }
+
+    .selected-items h3 {
+      color: #ff4444;
+    }
+
+    .selected-items ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .selected-items li {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .submit-button {
+      display: block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ff4444;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background-color: #e63939;
+    }
+
+    /* Premium Section */
+    .premium-section {
+      margin-top: 50px;
+      padding: 30px;
+      background: linear-gradient(45deg, #ff4444, #ff9900);
+      color: white;
+      text-align: center;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 68, 68, 0.6);
+      animation: glow 1.5s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px rgba(255, 68, 68, 0.8); }
+      to { box-shadow: 0 0 20px rgba(255, 165, 0, 1); }
+    }
+
+    .premium-section h2 {
+      font-size: 28px;
+      text-transform: uppercase;
+    }
+
+    .limited-deal {
+      font-size: 20px;
+      font-weight: bold;
+      color: yellow;
+      animation: blink 1s infinite alternate;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      100% { opacity: 0.5; }
+    }
+
+    .premium-plan {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 15px;
+      margin: 15px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .premium-plan:hover {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .premium-plan h3 {
+      color: yellow;
+    }
+
+    .buy-button {
+      background: yellow;
+      color: #333;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .buy-button:hover {
+      background: white;
+      transform: scale(1.1);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>BloxTrade</h1>
+    <p>Your Ultimate Blox Fruits Trading Platform</p>
+  </header>
+
+  <div class="container">
+    <h2>Select Items for Trade</h2>
+    <div class="dropdown">
+      <select id="item-select">
+        <option value="">Select an item</option>
+        <option value="Quake Fruit">Quake Fruit</option>
+        <option value="Magma Fruit">Magma Fruit</option>
+        <option value="Ghost Fruit">Ghost Fruit</option>
+        <option value="Ice Fruit">Ice Fruit</option>
+        <option value="Rubber Fruit">Rubber Fruit</option>
+
+        <option value="Perm Rocket">Perm Rocket</option>
+        <option value="Perm Spin">Perm Spin</option>
+        <option value="Perm Blade">Perm Blade</option>
+        <option value="Perm Smoke">Perm Smoke</option>
+
+        <option value="Stat Reset">Stat Reset</option>
+        <option value="Respawn Boses">Respawn Boses</option>
+        <option value="Change Race">Change Race</option>
+        
+        <option value="2x Money Game Pass">2x Money Game Pass</option>
+        <option value="2x Mastery Game Pass">2x Mastery Game Pass</option>
+        <option value="2x Boss Drop Chance Game Pass">2x Boss Drop Chance Game Pass</option>
+        <option value="Boss Reset Game Pass">Boss Reset Game Pass</option>
+      </select>
+    </div>
+
+    <div class="selected-items">
+      <h3>Selected Items (Max 4)</h3>
+      <ul id="selected-items-list"></ul>
+    </div>
+    <a href="homepage.html">
+    <button class="submit-button" id="submit-button">Submit</button>
+    </a>
+  </div>
+
+  <!-- Premium Section -->
+  <div class="premium-section">
+    <h2>VIP Membership</h2>
+    <p class="limited-deal">🔥 Limited Time Deal! 🔥</p>
+
+    <div class="premium-plan">
+      <h3>🔥 Ultimate VIP - <span style="text-decoration: line-through; color: lightgray;">₹300</span> → ₹250</h3>
+      <p>✔ 2 Permanent Rocket Fruits</p>
+      <p>✔ Faster Trading</p>
+      <p>✔ Access to Reserved Fruits</p>
+      <p>✔ Golden "VIP" Title</p>
+      <a href="premium1444.html">
+      <button class="buy-button">Buy Now</button>
+      </a>
+    </div>
+
+    <div class="premium-plan">
+      <h3>💎 VIP Lite - ₹79</h3>
+      <p>✔ Faster Trading</p>
+      <p>✔ Access to Reserved Fruits</p>
+      <p>✔ Golden "VIP" Title</p>
+      <a href="premium1444.html">
+      <button class="buy-button">Buy Now</button>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 BloxTrade. All rights reserved.</p>
+  </div>
+
+  <script>
+    const itemSelect = document.getElementById("item-select");
+    const selectedItemsList = document.getElementById("selected-items-list");
+    const submitButton = document.getElementById("submit-button");
+    const selectedItems = [];
+
+    itemSelect.addEventListener("change", () => {
+      const selectedItem = itemSelect.value;
+
+      if (selectedItem && !selectedItems.includes(selectedItem)) {
+        if (selectedItems.length < 4) {
+          selectedItems.push(selectedItem);
+          updateSelectedItemsList();
+        } else {
+          alert("You can only select up to 4 items.");
+        }
+      }
+
+      itemSelect.value = "";
+    });
+
+    submitButton.addEventListener("click", () => {
+      if (selectedItems.length === 4) {
+        window.location.href = "premium1444.html";
+      } else {
+        alert("Redirecting to Next page....");
+      }
+    });
+
+    function updateSelectedItemsList() {
+      selectedItemsList.innerHTML = selectedItems.map(item => `<li>${item}</li>`).join("");
+    }
+  </script>
+
+</body>
+</html>

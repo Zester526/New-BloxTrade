@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Premium Membership</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            overflow-y: auto; /* Allow body to scroll */
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            margin: 20px;
+            overflow-y: auto; /* Allow container to scroll */
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .qr-code {
+            margin: 10px 0;
+            padding: 5px;
+            border: 3px solid #28a745;
+            border-radius: 10px;
+            display: inline-block;
+            background: #e8ffe8;
+        }
+        .qr-code img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 8px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .btn {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        .success-message {
+            display: none;
+            color: #28a745;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .error-message {
+            display: none;
+            color: #dc3545;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .instructions {
+            font-size: 14px;
+            color: #555;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Buy Premium Membership</h1>
+        
+        <!-- Premium Plan -->
+        <div class="plan">
+            <h2>Buy Premium (₹79)</h2>
+            <div class="qr-code">
+                <img src="fam2.jpg" alt="Premium QR Code">
+            </div>
+        </div>
+
+        <!-- Premium+ Plan -->
+        <div class="plan">
+            <h2>Buy Premium+ (₹250)</h2>
+            <div class="qr-code">
+                <img src="fam.jpg" alt="Premium+ QR Code">
+            </div>
+        </div>
+
+        <!-- Payment Verification Form -->
+        <div class="form-group">
+            <label for="username">Enter Your Username:</label>
+            <input type="text" id="username" placeholder="Roblox Username">
+        </div>
+        <div class="form-group">
+            <label for="transaction-id">Enter Transaction ID:</label>
+            <input type="text" id="transaction-id" placeholder="e.g., TXN123456">
+        </div>
+        <div class="form-group">
+            <label for="amount">Enter Paid Amount:</label>
+            <input type="number" id="amount" placeholder="Amount Paid">
+        </div>
+        <div class="form-group">
+            <label for="screenshot">Upload Payment Screenshot:</label>
+            <input type="file" id="screenshot" accept="image/*">
+        </div>
+        <button class="btn" onclick="verifyPayment()">Submit</button>
+
+        <!-- Success Message -->
+        <div id="success-message" class="success-message">
+            <p>Payment Successful!</p>
+            <p>Please take a screenshot of this page and email it to <strong>bloxtrade916@gmail.com</strong> along with your Roblox username to activate your VIP.</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error-message" class="error-message">
+            <p>Payment Verification Failed!</p>
+            <p>Please ensure the transaction ID and amount match the screenshot and chosen plan.</p>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <p><strong>Instructions:</strong></p>
+            <ol>
+                <li>Scan the QR code and complete the payment.</li>
+                <li>Enter your username, transaction ID, and paid amount.</li>
+                <li>Upload the payment screenshot.</li>
+                <li>Click "Submit" to confirm your payment.</li>
+                <li>Take a screenshot of the success message and email it to <strong>bloxtrade916@gmail.com</strong> with your Roblox username.</li>
+                <li>Your VIP will be activated shortly after verification.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Include Tesseract.js for OCR -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.4/dist/tesseract.min.js"></script>
+    <script>
+        async function verifyPayment() {
+            const username = document.getElementById('username').value.trim();
+            const transactionId = document.getElementById('transaction-id').value.trim();
+            const amount = parseFloat(document.getElementById('amount').value.trim());
+            const screenshot = document.getElementById('screenshot').files[0];
+
+            if (!username || !transactionId || !amount || !screenshot) {
+                alert('Please fill in all details and upload the screenshot.');
+                return;
+            }
+
+            // Extract text from the screenshot using Tesseract.js
+            const result = await Tesseract.recognize(screenshot, 'eng');
+            const extractedText = result.data.text;
+
+            // Check if the transaction ID and amount match the extracted text
+            const isTransactionIdMatch = extractedText.includes(transactionId);
+            const isAmountMatch = extractedText.includes(amount.toString());
+
+            // Check if the amount matches the chosen plan
+            const isPlanMatch = amount === 79 || amount === 250;
+
+            if (isTransactionIdMatch && isAmountMatch && isPlanMatch) {
+                document.getElementById('success-message').style.display = 'block';
+                document.getElementById('error-message').style.display = 'none';
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('success-message').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

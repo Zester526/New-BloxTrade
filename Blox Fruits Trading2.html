@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blox Fruits Stock - BloxTrade</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    
+    header {
+      background-color: #ff4444;
+      color: white;
+      padding: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    .open-trades-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 30px;
+      background: linear-gradient(45deg, #ff8800, #ff4444);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+      border: none;
+      margin-top: 20px;
+    }
+
+    .open-trades-btn:hover {
+      background: linear-gradient(45deg, #ff4444, #ff8800);
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .fruit-section {
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff3f3;
+      border: 2px solid #ff4444;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease-in-out;
+    }
+
+    .fruit-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fruit-section h2 {
+      color: #ff4444;
+      margin-top: 0;
+    }
+
+    .fruit-section p {
+      font-size: 18px;
+      color: #333;
+    }
+
+    .fruit-section .price {
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .fruit-section .rarity {
+      font-weight: bold;
+      color: #28a745;
+    }
+
+    .trade-button {
+      display: inline-block;
+      padding: 12px 25px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 25px;
+      background: linear-gradient(45deg, #ff4444, #ff8800);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease-in-out;
+      margin-top: 10px;
+    }
+
+    .trade-button:hover {
+      background: linear-gradient(45deg, #ff8800, #ff4444);
+      transform: scale(1.1);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #777;
+    }
+
+    .profile-section {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #fff3f3;
+      border: 2px solid #ff4444;
+      border-radius: 10px;
+      text-align: left;
+    }
+
+    .profile-section h2 {
+      color: #ff4444;
+      margin-top: 0;
+    }
+
+    .profile-section p {
+      font-size: 18px;
+      color: #333;
+    }
+
+    .profile-section button {
+      background-color: #ff4444;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .profile-section button:hover {
+      background-color: #cc0000;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>BloxTrade</h1>
+    <p>Your Ultimate Blox Fruits Trading Platform</p>
+
+    <div class="auth-buttons">
+      <button onclick="location.href='signup.html'">Sign In</button>
+      <button onclick="location.href='login.html'">Log In</button>
+    </div>
+  </header>
+
+  <style>
+    .auth-buttons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .auth-buttons button {
+      background: white;
+      color: #ff4444;
+      border: 2px solid #ff4444;
+      padding: 10px 15px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      margin-left: 10px;
+    }
+
+    .auth-buttons button:hover {
+      background: #ff4444;
+      color: white;
+    }
+  </style>
+
+  <!-- Open Trades Button -->
+  <button class="open-trades-btn" onclick="openTrades()">Open Trades</button>
+
+  <div class="container" id="fruits-list-container" style="display: none;">
+    <h2>Available Fruits for Trade</h2>
+    <div id="fruits-list">
+      <!-- Fruit sections will be dynamically added here -->
+    </div>
+  </div>
+
+  <!-- Profile Section -->
+  <div class="container profile-section" id="profile-section">
+    <h2>Profile</h2>
+    <p><strong>Username:</strong> <span id="profile-username"></span></p>
+    <p><strong>Password:</strong> <span id="profile-password" class="hidden">********</span></p>
+    <input type="password" id="password-input" placeholder="Enter your password to view" class="hidden">
+    <button onclick="revealPassword()">View Password</button>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 BloxTrade. All rights reserved.</p>
+  </div>
+
+  <script>
+    // Check if the user is logged in
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      document.querySelector('header h1').innerText += ` - Welcome, ${currentUser}`;
+      document.getElementById('profile-username').innerText = currentUser;
+    } else {
+      alert('Please log in to continue.');
+      window.location.href = 'login.html';
+    }
+
+    // Array of fruits (add new fruits here)
+    const fruits = [
+      { name: "Quake Fruit", priceBeli: "1,000,000 Beli", priceRobux: "1500 Robux", rarity: "Legendary" },
+      { name: "Magma Fruit", priceBeli: "960,000 Beli", priceRobux: "1300 Robux", rarity: "Rare" },
+      { name: "Ghost Fruit", priceBeli: "940,000 Beli", priceRobux: "1,275 Robux", rarity: "Rare" },
+      { name: "Ice Fruit", priceBeli: "350,000 Beli", priceRobux: "750 Robux", rarity: "Uncommon" },
+      { name: "Rubber Fruit", priceBeli: "750,000 Beli", priceRobux: "1,200 Robux", rarity: "Rare" },
+
+      { name: "Perm Rocket", priceBeli: "[Special]", priceRobux: "50 Robux", rarity: "[Common]" },
+      { name: "Perm Spin", priceBeli: "[Special]", priceRobux: "75 Robux", rarity: "[Common]" },
+      { name: "Perm Blade", priceBeli: "[Special]", priceRobux: "100 Robux", rarity: "[Common]" },
+      { name: "Perm Smoke", priceBeli: "[Special]", priceRobux: "250 Robux", rarity: "[Common]" },
+
+      { name: "Stat Reset", priceBeli: "[Special]", priceRobux: "75 Robux", rarity: "[Special]" },
+      { name: "Respawn boses", priceBeli: "[Special]", priceRobux: "50 Robux", rarity: "[Special]" },
+      { name: "Change Race", priceBeli: "[Special]", priceRobux: "90 Robux", rarity: "[Special]" },
+
+      { name: "2x Money pass", priceBeli: "[Special]", priceRobux: "450 Robux", rarity: "[Special]" },
+      { name: "2x Mastery pass", priceBeli: "[Special]", priceRobux: "450 Robux", rarity: "[Special]" },
+      { name: "Fast Boat", priceBeli: "[Special]", priceRobux: "350 Robux", rarity: "[Special]" },
+      { name: "2x Boss Drop Chance pass", priceBeli: "[Special]", priceRobux: "350 Robux", rarity: "[Special]" }
+      ,
+
+      // Add more fruits here
+    ];
+
+    let tradesOpened = false;
+
+    function openTrades() {
+      const container = document.getElementById("fruits-list-container");
+      const fruitsList = document.getElementById("fruits-list");
+
+      if (!tradesOpened) {
+        container.style.display = "block";
+        fruitsList.innerHTML = ""; // Clear previous entries to avoid duplication
+
+        fruits.forEach((fruit, index) => {
+          setTimeout(() => {
+            const fruitSection = document.createElement("div");
+            fruitSection.className = "fruit-section";
+
+            fruitSection.innerHTML = `
+              <h2>${fruit.name}</h2>
+              <p><span class="price">Price (Beli):</span> ${fruit.priceBeli}</p>
+              <p><span class="price">Price (Robux):</span> ${fruit.priceRobux}</p>
+              <p><span class="rarity">Rarity:</span> ${fruit.rarity}</p>
+              <a href="trade4.html" class="trade-button">TRADE NOW</a>
+            `;
+
+            fruitsList.appendChild(fruitSection);
+
+            // Smooth fade-in effect
+            setTimeout(() => {
+              fruitSection.classList.add("visible");
+            }, 50);
+          }, index * 200); // Delayed effect for smooth appearance
+        });
+
+        tradesOpened = true;
+      }
+    }
+
+    // Reveal Password Functionality
+    function revealPassword() {
+      const passwordInput = document.getElementById('password-input');
+      const passwordSpan = document.getElementById('profile-password');
+
+      if (passwordInput.classList.contains('hidden')) {
+        passwordInput.classList.remove('hidden');
+        passwordInput.focus();
+      } else {
+        const enteredPassword = passwordInput.value;
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users.find(user => user.username === currentUser);
+
+        if (user && user.password === enteredPassword) {
+          passwordSpan.innerText = user.password;
+          passwordSpan.classList.remove('hidden');
+          passwordInput.classList.add('hidden');
+        } else {
+          alert('Incorrect password. Please try again.');
+        }
+      }
+    }
+  </script>
+</body>
+</html>

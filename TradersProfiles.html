@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader Profiles - BloxTrade</title>
+</head>
+<body>
+
+    <h1>Trader Profiles</h1>
+
+    <button onclick="resetMonthlyTrades()">Reset Monthly Trades</button>
+
+    <script>
+        let removedTraders = JSON.parse(localStorage.getItem('removedTraders')) || [];
+        let currentTrader = localStorage.getItem('currentTrader');
+
+        if (removedTraders.includes(currentTrader)) {
+            if (!sessionStorage.getItem('kickWarningShown')) {
+                alert("You have been removed from the platform. Contact bloxtraders916@gmail.com for more info.");
+                sessionStorage.setItem('kickWarningShown', 'true'); 
+            }
+            localStorage.removeItem('currentTrader'); 
+            window.location.href = 'trader-signup.html';
+        }
+
+        function updateTraderStats(username, newTradesThisMonth, newTotalTrades, newRevenue) {
+            let traders = JSON.parse(localStorage.getItem('traders')) || [];
+            let trader = traders.find(t => t.username === username);
+
+            if (trader) {
+                trader.tradesThisMonth = newTradesThisMonth;  
+                trader.totalTrades = newTotalTrades; 
+                trader.monthlyRevenue = newRevenue; 
+
+                localStorage.setItem('traders', JSON.stringify(traders)); 
+            }
+        }
+
+        function resetMonthlyTrades() {
+            let traders = JSON.parse(localStorage.getItem('traders')) || [];
+            traders.forEach(trader => {
+                trader.tradesThisMonth = 0; 
+                trader.monthlyRevenue = "0 Robux";
+            });
+            localStorage.setItem('traders', JSON.stringify(traders)); 
+            alert("Monthly trades reset successfully!");
+        }
+
+        function removeTrader(index) {
+            if (confirm("Are you sure you want to remove this trader?")) {
+                let traders = JSON.parse(localStorage.getItem('traders')) || [];
+                let removedTrader = traders[index].username;
+
+                removedTraders.push(removedTrader);
+                localStorage.setItem('removedTraders', JSON.stringify(removedTraders));
+
+                traders.splice(index, 1);
+                localStorage.setItem('traders', JSON.stringify(traders));
+
+                alert("Trader removed successfully!");
+            }
+        }
+    </script>
+
+</body>
+</html>

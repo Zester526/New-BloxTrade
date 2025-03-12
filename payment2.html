@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blox Trade - Payment">
+    <title>Blox Trade - Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #ff4444;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
+        nav a:hover {
+            color: #ff4444;
+        }
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .content h2 {
+            color: #ff4444;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        .payment-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .payment-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .upi-id {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #333;
+        }
+        .copy-button {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+        .copy-button:hover {
+            background-color: #cc0000;
+        }
+        .payment-instructions {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #555;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+        footer a {
+            color: #ff4444;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BLOX TRADE</h1>
+        <p>Premium Membership Payment</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="stock.html">Stock</a>
+        <a href="payment.html">Premium</a>
+    </nav>
+
+    <div class="content">
+        <h2>Payment Details</h2>
+        <div class="payment-section">
+            <p>Scan the QR code or use the UPI ID below to complete your payment of <s>₹300</s> ₹250 for Premium Membership.</p>
+            <div class="upi-id" id="upiId">9435482955@fam</div>
+            <button class="copy-button" onclick="copyUPI()">Copy UPI ID</button>
+            <div class="qr-code">
+                <img src="fam2.jpg" alt="QR Code"> <!-- Replace with your QR code image -->
+            </div>
+            <div class="payment-instructions">
+                <p>After payment, contact us with your transaction ID to activate your Premium Membership.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Blox Trade. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        function copyUPI() {
+            const upiId = document.getElementById('upiId').innerText;
+            navigator.clipboard.writeText(upiId).then(function () {
+                alert('UPI ID copied to clipboard: ' + upiId);
+            }).catch(function () {
+                alert('Failed to copy UPI ID.');
+            });
+        }
+    </script>
+</body>
+</html>

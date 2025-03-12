@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloxTrade - The Future of Trading!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <!-- Linking External CSS -->
+</head>
+<body>
+
+    <div class="container">
+        <h1>🚀 BloxTrade is Changing the Game!</h1>
+        <p>The ultimate trading platform is about to launch. Get ready to experience <b>secure, fast, and reliable</b> trading like never before!</p>
+        
+        <div class="countdown" id="countdown">
+            00d 00h 00m 00s
+        </div>
+
+        <div class="features">
+            <h2>🔥 Why BloxTrade?</h2>
+            <ul>
+                <li>⚡ <b>Instant Trades</b> - No more waiting! Get your trades processed in seconds.</li>
+                <li>🔒 <b>100% Secure Transactions</b> - Your trades are <b>safe & verified</b> to prevent scams.</li>
+                <li>💰 <b>Fair Market Prices</b> - Get the best trade deals with our AI-powered pricing.</li>
+                <li>🤝 <b>Trusted Traders Only</b> - Our system ensures <b>verified & reputable</b> traders.</li>
+                <li>📢 <b>Live Notifications</b> - Get <b>instant updates</b> on new trade offers.</li>
+                <li>📈 <b>Track Your Trades</b> - Keep <b>full trade history</b> in your account.</li>
+            </ul>
+        </div>
+
+        <div class="features">
+            <h2>🎯 <b>How Will BloxTrade Help You?</b></h2>
+            <ul>
+                <li>😡 <b>Tired of getting scammed?</b> <br> ✅ BloxTrade ensures <b>100% safe trading</b> with verified users.</li>
+                <li>⏳ <b>Hate slow trades?</b> <br> ✅ Our <b>instant matching system</b> lets you trade <b>within seconds</b>.</li>
+                <li>💸 <b>Can’t find the best prices?</b> <br> ✅ AI-powered pricing means <b>no overpaying or underselling</b>.</li>
+                <li>🔕 <b>Missing out on great deals?</b> <br> ✅ <b>Real-time alerts</b> so you never lose a good trade again!</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 BloxTrade. All rights reserved.</p>
+    </div>
+
+    <script>
+        function countdownTimer() {
+            const launchDate = new Date("March 23, 2025 00:00:00").getTime();
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = launchDate - now;
+                if (distance < 0) {
+                    document.getElementById("countdown").innerHTML = "🚀 We are live!";
+                    clearInterval(timer);
+                    return;
+                }
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
+        }
+        countdownTimer();
+    </script>
+
+</body>
+</html>

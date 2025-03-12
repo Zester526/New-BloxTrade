@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blox Fruits Stock - BloxTrade</title>
+  <style>
+    /* Your CSS styles here */
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>BloxTrade</h1>
+    <p>Your Ultimate Blox Fruits Trading Platform</p>
+    <div class="auth-buttons">
+        <button onclick="location.href='signup.html'">Sign In</button>
+        <button onclick="location.href='login.html'">Log In</button>
+    </div>
+  </header>
+
+  <button class="open-trades-btn" onclick="openTrades()">Open Trades</button>
+
+  <div class="container" id="fruits-list-container" style="display: none;">
+    <h2>Available Fruits for Trade</h2>
+    <div id="fruits-list">
+      <!-- Fruit sections will be dynamically added here -->
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 BloxTrade. All rights reserved.</p>
+  </div>
+
+  <script>
+    const fruits = [
+      { name: "Quake Fruit", priceBeli: "1,000,000 Beli", priceRobux: "1500 Robux", rarity: "Legendary" },
+      { name: "Magma Fruit", priceBeli: "960,000 Beli", priceRobux: "1300 Robux", rarity: "Rare" },
+      { name: "Ghost Fruit", priceBeli: "940,000 Beli", priceRobux: "1,275 Robux", rarity: "Rare" },
+      { name: "Ice Fruit", priceBeli: "350,000 Beli", priceRobux: "750 Robux", rarity: "Uncommon" },
+      // Add more fruits here
+    ];
+
+    let tradesOpened = false;
+
+    function openTrades() {
+      const container = document.getElementById("fruits-list-container");
+      const fruitsList = document.getElementById("fruits-list");
+
+      if (!tradesOpened) {
+        container.style.display = "block";
+        fruitsList.innerHTML = ""; // Clear previous entries to avoid duplication
+
+        fruits.forEach((fruit, index) => {
+          setTimeout(() => {
+            const fruitSection = document.createElement("div");
+            fruitSection.className = "fruit-section";
+
+            fruitSection.innerHTML = `
+              <h2>${fruit.name}</h2>
+              <p><span class="price">Price (Beli):</span> ${fruit.priceBeli}</p>
+              <p><span class="price">Price (Robux):</span> ${fruit.priceRobux}</p>
+              <p><span class="rarity">Rarity:</span> ${fruit.rarity}</p>
+              <a href="trade4.html" class="trade-button">TRADE NOW</a>
+            `;
+
+            fruitsList.appendChild(fruitSection);
+
+            // Smooth fade-in effect
+            setTimeout(() => {
+              fruitSection.classList.add("visible");
+            }, 50);
+          }, index * 200); // Delayed effect for smooth appearance
+        });
+
+        tradesOpened = true;
+      }
+    }
+  </script>
+</body>
+</html>

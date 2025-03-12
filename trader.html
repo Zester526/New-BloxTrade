@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trader's Dashboard - BloxTrade</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background-color: #ff4444;
+      color: white;
+      padding: 20px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+    .auth-buttons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .auth-buttons button {
+      background: white;
+      color: #ff4444;
+      border: 2px solid #ff4444;
+      padding: 10px 15px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      margin-left: 10px;
+    }
+    .auth-buttons button:hover {
+      background: #ff4444;
+      color: white;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .dashboard-section {
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff3f3;
+      border: 2px solid #ff4444;
+      text-align: left;
+    }
+    .dashboard-section h2 {
+      color: #ff4444;
+      margin-top: 0;
+    }
+    .dashboard-section p {
+      font-size: 18px;
+      color: #333;
+    }
+    .dashboard-section button {
+      background-color: #ff4444;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .dashboard-section button:hover {
+      background-color: #cc0000;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Trader's Dashboard</h1>
+    <div class="auth-buttons">
+      <button onclick="location.href='trader-signup.html'">Sign In</button>
+      <button onclick="location.href='trader-login.html'">Log In</button>
+    </div>
+  </header>
+
+  <div class="container" id="dashboard-container" style="display: none;">
+    <div class="dashboard-section">
+      <h2>Welcome, <span id="trader-username"></span></h2>
+      <p><strong>Password:</strong> <span id="trader-password" class="hidden">********</span></p>
+      <input type="password" id="password-input" placeholder="Enter your password to view" class="hidden">
+      <button onclick="revealPassword()">View Password</button>
+    </div>
+
+    <div class="dashboard-section">
+      <h2>Trade Statistics</h2>
+      <p><strong>Trades This Month:</strong> <span id="trades-this-month">0</span></p>
+      <p><strong>Total Trades:</strong> <span id="total-trades">0</span></p>
+      <p><strong>Trade Goal:</strong> 50</p>
+      <p><strong>Monthly Revenue (if goal is reached):</strong> <span id="monthly-revenue">0 Robux</span></p>
+      <p style="color: red; font-weight: bold;">⚠️ Failing to complete the trade goal will result in zero payment.</p>
+      <p style="color: green; font-weight: bold;">💰 Serving with good potential may increase future revenue!</p>
+    </div>
+
+    <div class="dashboard-section">
+      <button onclick="location.href='TradeRequests.html'">See Available Trades</button>
+    </div>
+
+    <div class="dashboard-section">
+      <h2>Suggest a Better Trade</h2>
+      <p>If a user's requested trade is not worthy, you can suggest a better trade.</p>
+      <button onclick="suggestTrade()">Suggest Trade</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 BloxTrade. All rights reserved.</p>
+  </div>
+
+  <script>
+    function updateDashboard() {
+        const currentTrader = localStorage.getItem('currentTrader');
+        if (!currentTrader) {
+            alert('Please log in to access the dashboard.');
+            window.location.href = 'trader-login.html';
+            return;
+        }
+
+        // Fetch latest traders data from localStorage
+        const traders = JSON.parse(localStorage.getItem('traders')) || [];
+        const trader = traders.find(t => t.username === currentTrader);
+
+        if (!trader) {
+            alert('Your account has been removed from the platform.');
+            localStorage.removeItem('currentTrader'); // Log out the user
+            window.location.href = 'trader-login.html';
+            return;
+        }
+
+        // Update UI with real-time data
+        document.getElementById('trader-username').innerText = trader.username;
+        document.getElementById('trades-this-month').innerText = trader.tradesThisMonth || 0;
+        document.getElementById('total-trades').innerText = trader.totalTrades || 0;
+
+        // Ensure monthly revenue updates dynamically
+        document.getElementById('monthly-revenue').innerText = trader.tradesThisMonth >= 50 ? "250 Robux" : "0 Robux";
+    }
+
+    // Run the update function every 3 seconds for real-time updates
+    setInterval(updateDashboard, 3000);
+
+    // Initial call to populate data immediately
+    updateDashboard();
+
+    // Check if the trader is logged in
+    const currentTrader = localStorage.getItem('currentTrader');
+    if (currentTrader) {
+      document.getElementById('dashboard-container').style.display = 'block';
+      document.getElementById('trader-username').innerText = currentTrader;
+    } else {
+      alert('Please log in to access the dashboard.');
+      window.location.href = 'trader-login.html';
+    }
+
+    // Reveal Password Functionality
+    function revealPassword() {
+      const passwordInput = document.getElementById('password-input');
+      const passwordSpan = document.getElementById('trader-password');
+
+      if (passwordInput.classList.contains('hidden')) {
+        passwordInput.classList.remove('hidden');
+        passwordInput.focus();
+      } else {
+        const enteredPassword = passwordInput.value;
+        const traders = JSON.parse(localStorage.getItem('traders')) || [];
+        const trader = traders.find(t => t.username === currentTrader);
+
+        if (trader && trader.password === enteredPassword) {
+          passwordSpan.innerText = trader.password;
+          passwordSpan.classList.remove('hidden');
+          passwordInput.classList.add('hidden');
+        } else {
+          alert('Incorrect password. Please try again.');
+        }
+      }
+    }
+
+    // Suggest Trade Functionality
+    function suggestTrade() {
+      const userRequest = prompt("Enter the user's requested trade:");
+      const suggestedTrade = prompt("Suggest a better trade:");
+
+      if (userRequest && suggestedTrade) {
+        alert(`You suggested: "${suggestedTrade}" for the user's request: "${userRequest}".`);
+      } else {
+        alert('Please provide both the user\'s request and your suggestion.');
+      }
+    }
+  </script>
+</body>
+</html>
